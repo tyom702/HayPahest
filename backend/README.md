@@ -10,7 +10,7 @@
 - **FastAPI** (Ասինխրոն, բարձր արագագործությամբ REST API)
 - **SQLAlchemy 2.0** (Async Engine + DeclarativeBase)
 - **Pydantic 2.0** (Տվյալների վալիդացիա և սխեմաներ)
-- **PostgreSQL** (Ռելացիոն բազա `asyncpg` և `psycopg2-binary` դրայվերներով)
+- **PostgreSQL** (Ռելացիոն բազա `asyncpg` ասինխրոն դրայվերով)
 - **Alembic** (Բազայի ավտոմատացված միգրացիաներ)
 - **Uvicorn** (ASGI սերվեր)
 - **Pytest + Pytest-Asyncio + HTTPX** (Ավտոմատացված ինտեգրացիոն թեստեր)

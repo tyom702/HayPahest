@@ -26,6 +26,25 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/haypahest_db"
     DATABASE_SYNC_URL: str = "postgresql://postgres:postgres@localhost:5432/haypahest_db"
 
+    @field_validator("DATABASE_URL", mode="before")
+    @classmethod
+    def ensure_async_database_url(cls, v: Union[str, None]) -> str:
+        default_url = "postgresql+asyncpg://postgres:postgres@localhost:5432/haypahest_db"
+        if v is None:
+            return default_url
+        url = str(v).strip()
+        if not url:
+            return default_url
+        if url.startswith("postgres://"):
+            return "postgresql+asyncpg://" + url[len("postgres://"):]
+        if url.startswith("postgresql+psycopg2://"):
+            return "postgresql+asyncpg://" + url[len("postgresql+psycopg2://"):]
+        if url.startswith("postgresql+psycopg://"):
+            return "postgresql+asyncpg://" + url[len("postgresql+psycopg://"):]
+        if url.startswith("postgresql://"):
+            return "postgresql+asyncpg://" + url[len("postgresql://"):]
+        return url
+
     # CORS
     BACKEND_CORS_ORIGINS: List[str] = [
         "http://localhost:3000",
